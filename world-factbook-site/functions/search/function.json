@@ -1,0 +1,29 @@
+{
+  "bindings": [
+    {
+      "authLevel": "anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get",
+        "post"
+      ]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "cosmosDB",
+      "name": "countryList",
+      "databaseName": "...your-cosmos-db-name...",
+      "collectionName": "Country",
+      "connectionStringSetting": "factbook_DOCUMENTDB",
+      "direction": "in",
+      "partitionKey": "Factbook",
+      "sqlQuery": "SELECT c.name,c.key FROM c WHERE CONTAINS(c.name,{term}) OR CONTAINS(c.key,{term}) OR CONTAINS(c.introduction.background, {term}) OR CONTAINS(c.geography.map_references, {term}) OR CONTAINS(c.geography.climate, {term}) OR CONTAINS(c.geography.terrain, {term}) OR CONTAINS(c.geography.population_distribution, {term}) OR CONTAINS(c.government.government_type, {term})  OR CONTAINS(c.economy.overview, {term})   OR CONTAINS(c.transnational_issues.disputes[0], {term}) ORDER by c.name"
+    }
+  ]
+}

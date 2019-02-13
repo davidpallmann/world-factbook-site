@@ -1,0 +1,29 @@
+{
+  "bindings": [
+    {
+      "authLevel": "anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get",
+        "post"
+      ]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "cosmosDB",
+      "name": "countryList",
+      "databaseName": "...your-cosmos-db-name...",
+      "collectionName": "Country",
+      "sqlQuery": "SELECT * FROM c where c.key = {country}",
+      "connectionStringSetting": "factbook_DOCUMENTDB",
+      "partitionKey": "Factbook",
+      "direction": "in"
+    }
+  ]
+}

@@ -1,0 +1,333 @@
+/* source: https://www.taniarascia.com/simple-jquery-examples-with-code-and-demos/ */
+
+* {
+    box-sizing: border-box;
+}
+
+#searchbox input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+}
+
+button {
+    /*float: left;*/
+    /*width: 20%;*/
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    height: 38px;
+    cursor: pointer;
+}
+
+.preamble {
+    width: 100%;
+    background-color: white;
+    color: black;
+    margin: 0;
+    padding: 8px;
+}
+
+
+html {
+    min-height: 100%;
+    font-family: 'Nunito', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    /*background: linear-gradient(to bottom right, #3D4258, #6670A0, #9688B4);*/
+    line-height: 1.5;
+    margin: 0;
+}
+
+.logo {
+    height: 64px;
+    /*position: absolute;
+    top: 16px;
+    left: 16px;*/
+}
+
+#country-view {
+    position: absolute;
+    top: 110px;
+    left: 16px;
+}
+
+#results-view {
+    position: absolute;
+    top: 110px;
+    left: 16px;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 32px;
+    color: black;
+    margin-bottom: 0;
+    /*margin-left: 120px;*/
+    line-height: normal;
+}
+
+h2 {
+    margin-bottom: 0;
+    margin-top: 0;
+    color: white;
+    font-size: 36px;
+    color: navajowhite;
+}
+
+.subtitle {
+    color: black;
+    font-size: 14px;
+    /*margin-left: 150px;*/
+    margin-top: 0px;
+}
+
+a {
+    /*color: hotpink;*/
+    color: tan;
+}
+
+.selector {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    /*float: right;*/
+}
+
+select {
+    border-bottom: 1px solid #DDE0E7;
+    color: #2a313a;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 0.5em;
+    margin-bottom: 14px;
+    max-width: 300px;
+    background-color: Wheat;
+}
+
+.searchbox {
+    position: absolute;
+    right: 350px;
+    top: 16px;
+}
+
+input {
+    /*border-bottom: 1px solid #DDE0E7;*/
+    /*color: #2a313a;*/
+    color: black;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 0.5em;
+    margin-bottom: 14px;
+    vertical-align: top;
+    background-color: Wheat;
+}
+
+option {
+    border-bottom: 1px solid #DDE0E7;
+    color: #2a313a;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 0.5em;
+    margin: 0.5em;
+    height: 200px;
+}
+
+
+.item {
+    
+    margin-bottom: 8px;
+}
+
+.content-image-thumbnail {
+    height: 32px;
+}
+
+.content-image {
+    max-width: 50%;
+    max-height: 192px;
+    overflow: hidden;
+}
+
+.content-image-large {
+    max-width: calc(100% - 16px);
+    overflow: hidden;
+}
+
+.accordion {
+    /*background: linear-gradient(to bottom right, white, #F8F8F8);*/
+    max-width: 100% !important /*400px*/;
+    /*background: white;*/
+    background-color: transparent;
+    /*margin: 0 auto;*/
+    box-shadow: 0 15px 20px -15px rgba(0, 0, 0, 0.3), 0 35px 50px -25px rgba(0, 0, 0, 0.3), 0 85px 60px -25px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-header {
+    border-bottom: 1px solid cornsilk;
+    /*color: #2a313a;*/
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+    padding: 0.5em;
+    max-width: 250px;
+    /*background-color: yellow;*/
+}
+
+    .accordion-header:hover {
+        /*background: #F6F7F9;*/
+        color: navajowhite;
+    }
+
+.accordion-content {
+    display: none;
+    border-bottom: 1px solid #DDE0E7;
+    /*background: #F6F7F9;*/
+    background-color: Cornsilk;
+    opacity: 0.9;
+    padding: 1.5rem;
+    /*color: #4a5666;*/
+    color: firebrick;
+    max-width: calc(100% - 16px);
+}
+
+.accordion-header::before {
+    content: '';
+    vertical-align: middle;
+    display: inline-block;
+    width: .75rem;
+    height: .75rem;
+    border-radius: 50%;
+    background-color: #B1B5BE;
+    margin-right: .75rem;
+}
+
+.active.accordion-header::before {
+    background-color: cornsilk;
+}
+
+
+#results-table {
+    table-layout: fixed;
+    margin-right: 16px;
+    border-spacing: 0;
+    border-collapse: separate;
+}
+
+#results-table td  {
+    height: 60px;
+    overflow: hidden;
+}
+
+    #results-table tr:first-child td {
+        /*border-top: 1pt solid #ffd800;*/
+        border-top: 1px solid cornsilk;
+    }
+
+    #results-table td {
+        border-bottom: 1pt solid cornsilk;
+    }
+
+
+/* ---------- mobile device ---------- */
+
+@media only screen and (max-device-width: 1024px)  {
+
+    /* preamble (first row) is the container around the page banner */
+
+    .preamble {
+        margin-top: 0px;
+    }
+
+
+    .logo {
+        height: 64px; 
+        position: absolute; 
+        top: 0px; 
+        left: 16px;
+    }
+
+    h1 {
+        font-weight: 700;
+        font-size: 1.5em;
+        margin-bottom: 0;
+        margin-left: 100px;
+        line-height: normal;
+    }
+
+    .subtitle {
+        font-size: 0.7em;
+        margin-left: 105px;
+        margin-top: 0;
+    }
+
+    /* selector (second row) is the container around the country select drop-down */
+
+    .selector {
+        position: absolute;
+        right: 4px;
+        top: 76px;
+        left: 4px;
+        max-width: none;
+        width: auto;
+        overflow: hidden;
+    }
+
+    select {
+        max-width: 100%;
+    }
+
+    /* searchbox (third row) is the container around the search input box and button */
+
+    .searchbox {
+        position: absolute;
+        left: 4px;
+        top: 120px;
+        right: 4px;
+    }
+
+    input {
+        position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
+        /*width: 85%;*/
+    }
+
+
+
+    /* country view is the country record page */
+
+    #country-view {
+        top: 170px;
+    }
+
+    #results-view {
+        top: 170px;
+    }
+
+
+    h2{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+
+
+    .optional {
+        visibility: collapse;
+        height: 0;
+    }
+}
