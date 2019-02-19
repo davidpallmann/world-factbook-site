@@ -1,0 +1,1 @@
+SELECT top 10 c.name, c.key, c.economy.inflation_rate.annual_values[0], c.economy.inflation_rate.global_rank FROM c order by c.economy.inflation_rate.global_rank desc

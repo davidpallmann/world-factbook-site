@@ -18,7 +18,7 @@
     {
       "type": "cosmosDB",
       "name": "countryList",
-      "databaseName": "...your-cosmos-db-name...",
+      "databaseName": "factbook",
       "collectionName": "Country",
       "connectionStringSetting": "factbook_DOCUMENTDB",
       "direction": "in",

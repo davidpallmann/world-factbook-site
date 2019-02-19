@@ -1,0 +1,1 @@
+SELECT top 10 c.name, c.key, c.geography.area.total, c.geography.area.land, c.geography.area.water, c.geography.area.global_rank FROM c order by c.geography.area.global_rank desc

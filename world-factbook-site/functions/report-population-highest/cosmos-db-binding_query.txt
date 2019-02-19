@@ -1,0 +1,1 @@
+SELECT top 10 c.name, c.key, c.people.population.total,c.people.population.global_rank FROM c order by c.people.population.global_rank

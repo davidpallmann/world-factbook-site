@@ -20,10 +20,10 @@
       "name": "countryList",
       "databaseName": "factbook",
       "collectionName": "Country",
-      "sqlQuery": "SELECT * FROM c where c.key = {country}",
       "connectionStringSetting": "factbook_DOCUMENTDB",
+      "direction": "in",
       "partitionKey": "Factbook",
-      "direction": "in"
+      "sqlQuery": "SELECT top 10 c.name, c.key, c.communications.internet.users.total, c.communications.internet.users.percent_of_population, c.communications.internet.users.global_rank FROM c order by c.communications.internet.users.global_rank asc"
     }
   ]
 }

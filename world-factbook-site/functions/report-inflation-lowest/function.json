@@ -20,10 +20,10 @@
       "name": "countryList",
       "databaseName": "factbook",
       "collectionName": "Country",
-      "sqlQuery": "SELECT * FROM c where c.key = {country}",
       "connectionStringSetting": "factbook_DOCUMENTDB",
+      "direction": "in",
       "partitionKey": "Factbook",
-      "direction": "in"
+      "sqlQuery": "SELECT top 10 c.name, c.key, c.economy.inflation_rate.annual_values[0], c.economy.inflation_rate.global_rank FROM c order by c.economy.inflation_rate.global_rank asc"
     }
   ]
 }

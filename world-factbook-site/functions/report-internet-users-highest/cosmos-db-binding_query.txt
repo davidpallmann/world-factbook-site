@@ -1,0 +1,1 @@
+SELECT top 10 c.name, c.key, c.communications.internet.users.total, c.communications.internet.users.percent_of_population, c.communications.internet.users.global_rank FROM c order by c.communications.internet.users.global_rank asc

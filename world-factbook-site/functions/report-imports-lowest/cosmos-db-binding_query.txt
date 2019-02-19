@@ -1,0 +1,1 @@
+SELECT top 10 c.name, c.key, c.economy.imports.total_value.annual_values[0], c.economy.imports.total_value.annual_values[1], c.economy.imports.total_value.global_rank FROM c order by c.economy.imports.total_value.global_rank desc

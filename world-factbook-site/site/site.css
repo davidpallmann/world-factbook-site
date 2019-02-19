@@ -1,4 +1,102 @@
-/* source: https://www.taniarascia.com/simple-jquery-examples-with-code-and-demos/ */
+/* Pinwheel spinner css - source: https://webkul.github.io/csspin/ */
+
+.cp-spinner {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    box-sizing: border-box;
+    position: relative
+}
+
+.cp-pinwheel {
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-top: solid 24px #0fd6ff;
+    border-right: solid 24px #58bd55;
+    border-bottom: solid 24px #eb68a1;
+    border-left: solid 24px #f3d53f;
+    animation: cp-pinwheel-animate 1s linear infinite
+}
+
+@keyframes cp-pinwheel-animate {
+    0% {
+        border-top-color: #0fd6ff;
+        border-right-color: #58bd55;
+        border-bottom-color: #eb68a1;
+        border-left-color: #f3d53f;
+        transform: rotate(0)
+    }
+
+    25% {
+        border-top-color: #eb68a1;
+        border-right-color: #f3d53f;
+        border-bottom-color: #0fd6ff;
+        border-left-color: #58bd55
+    }
+
+    50% {
+        border-top-color: #0fd6ff;
+        border-right-color: #58bd55;
+        border-bottom-color: #eb68a1;
+        border-left-color: #f3d53f
+    }
+
+    75% {
+        border-top-color: #eb68a1;
+        border-right-color: #f3d53f;
+        border-bottom-color: #0fd6ff;
+        border-left-color: #58bd55
+    }
+
+    100% {
+        border-top-color: #0fd6ff;
+        border-right-color: #58bd55;
+        border-bottom-color: #eb68a1;
+        border-left-color: #f3d53f;
+        transform: rotate(360deg)
+    }
+}
+
+/* Spinner css - source: http://tobiasahlin.com/spinkit/ */
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    margin: 100px auto;
+    background-color: #333;
+    border-radius: 100%;
+    -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+    animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-scaleout {
+    0% {
+        -webkit-transform: scale(0)
+    }
+
+    100% {
+        -webkit-transform: scale(1.0);
+        opacity: 0;
+    }
+}
+
+@keyframes sk-scaleout {
+    0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+
+    100% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+        opacity: 0;
+    }
+}
+
+/* accordion css - source: https://www.taniarascia.com/simple-jquery-examples-with-code-and-demos/ */
 
 * {
     box-sizing: border-box;
@@ -8,14 +106,12 @@
     padding: 10px;
     font-size: 17px;
     border: 1px solid grey;
-    float: left;
+    /*float: left;*/
     width: 80%;
     background: #f1f1f1;
 }
 
 button {
-    /*float: left;*/
-    /*width: 20%;*/
     padding: 10px;
     background: #2196F3;
     color: white;
@@ -42,16 +138,12 @@ html {
 }
 
 body {
-    /*background: linear-gradient(to bottom right, #3D4258, #6670A0, #9688B4);*/
     line-height: 1.5;
     margin: 0;
 }
 
 .logo {
     height: 64px;
-    /*position: absolute;
-    top: 16px;
-    left: 16px;*/
 }
 
 #country-view {
@@ -65,6 +157,13 @@ body {
     top: 110px;
     left: 16px;
 }
+
+#chart-view {
+    position: absolute;
+    top: 110px;
+    left: 16px;
+}
+
 
 h1 {
     font-weight: 700;
@@ -99,7 +198,6 @@ a {
     position: absolute;
     right: 16px;
     top: 16px;
-    /*float: right;*/
 }
 
 select {
@@ -114,15 +212,16 @@ select {
     background-color: Wheat;
 }
 
+
+
+
 .searchbox {
     position: absolute;
-    right: 350px;
+    right: 320px;
     top: 16px;
 }
 
 input {
-    /*border-bottom: 1px solid #DDE0E7;*/
-    /*color: #2a313a;*/
     color: black;
     cursor: pointer;
     font-size: 16px;
@@ -132,6 +231,11 @@ input {
     vertical-align: top;
     background-color: Wheat;
 }
+
+#select-chart {
+    visibility: visible;
+}
+
 
 option {
     border-bottom: 1px solid #DDE0E7;
@@ -165,39 +269,36 @@ option {
     overflow: hidden;
 }
 
+#btn-goto-chart, #btn-goto-search {
+    display: none;
+    vertical-align: middle;
+}
+
 .accordion {
-    /*background: linear-gradient(to bottom right, white, #F8F8F8);*/
-    max-width: 100% !important /*400px*/;
-    /*background: white;*/
+    max-width: 100% !important;
     background-color: transparent;
-    /*margin: 0 auto;*/
     box-shadow: 0 15px 20px -15px rgba(0, 0, 0, 0.3), 0 35px 50px -25px rgba(0, 0, 0, 0.3), 0 85px 60px -25px rgba(0, 0, 0, 0.1);
 }
 
 .accordion-header {
     border-bottom: 1px solid cornsilk;
-    /*color: #2a313a;*/
     color: white;
     cursor: pointer;
     font-weight: 700;
     padding: 0.5em;
     max-width: 250px;
-    /*background-color: yellow;*/
 }
 
     .accordion-header:hover {
-        /*background: #F6F7F9;*/
         color: navajowhite;
     }
 
 .accordion-content {
     display: none;
     border-bottom: 1px solid #DDE0E7;
-    /*background: #F6F7F9;*/
     background-color: Cornsilk;
     opacity: 0.9;
     padding: 1.5rem;
-    /*color: #4a5666;*/
     color: firebrick;
     max-width: calc(100% - 16px);
 }
@@ -231,13 +332,13 @@ option {
 }
 
     #results-table tr:first-child td {
-        /*border-top: 1pt solid #ffd800;*/
         border-top: 1px solid cornsilk;
     }
 
     #results-table td {
         border-bottom: 1pt solid cornsilk;
     }
+
 
 
 /* ---------- mobile device ---------- */
@@ -254,7 +355,7 @@ option {
     .logo {
         height: 64px; 
         position: absolute; 
-        top: 0px; 
+        top: 4px; 
         left: 16px;
     }
 
@@ -288,6 +389,10 @@ option {
         max-width: 100%;
     }
 
+    #select-chart {
+        visibility: collapse;
+    }
+
     /* searchbox (third row) is the container around the search input box and button */
 
     .searchbox {
@@ -302,10 +407,23 @@ option {
         top: 0;
         left: 0;
         right: 0;
-        /*width: 85%;*/
     }
 
+    #select-chart {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
 
+    #btn-goto-chart, #btn-goto-search {
+        position: absolute;
+        top: 0px;
+        right: 4px;
+    }
+
+    #btn-goto-chart {
+        display: inline-block;
+    }
 
     /* country view is the country record page */
 
@@ -317,6 +435,10 @@ option {
         top: 170px;
     }
 
+    #chart-view {
+        top: 170px;
+    }
+
 
     h2{
         white-space: nowrap;
@@ -324,7 +446,9 @@ option {
         text-overflow: ellipsis;
     }
 
-
+    #select-chart {
+        width: calc(100% - 110px);
+    }
 
     .optional {
         visibility: collapse;
