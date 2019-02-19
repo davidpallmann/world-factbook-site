@@ -194,7 +194,7 @@
                                 people += '<div class="item"><b>Birth Rate</b><br/>' + data.people.birth_rate.births_per_1000_population + ' births per thousand (' + data.people.birth_rate.date + ')</div>';
                             }
                             if (data.people.death_rate && data.people.death_rate.deaths_per_1000_population && data.people.death_rate.date) {
-                                people += '<div class="item"><b>Death Rate</b><br/>' + data.people.death_rate.deaths_per_1000_population + ' births per thousand (' + data.people.death_rate.date + ')</div>';
+                                people += '<div class="item"><b>Death Rate</b><br/>' + data.people.death_rate.deaths_per_1000_population + ' deaths per thousand (' + data.people.death_rate.date + ')</div>';
                             }
                         }
                         $('#content-people').html(people);
