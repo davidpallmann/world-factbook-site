@@ -15,7 +15,7 @@ http://davidpallmann.blogspot.com/2019/02/cia-world-factbook-data-on-azure-part-
 The web site is simply index.html and site.css and a background image, a static web page hosted in Azure Blob Storage.
 
 # API
-The API defines a RESTful front-end for the country lookup and search capabilities provided by the Azure Functions.
+The API defines a RESTful front-end for the country lookup, search, and charting capabilities provided by the Azure Functions.
 
 # Functions
 The Azure Functions power the API. They are written in JavaScript, are entered in the Azure Portal, and are configured to use Cosmos DB input bindings.
