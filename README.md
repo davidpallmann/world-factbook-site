@@ -8,8 +8,12 @@ World Factbook Site (this repository) is a web site and API (via Azure Functions
 The site is currently hosted at https://worldfactbook.blob.core.windows.net/site/index.html
 
 For details, see these blog posts:
+
 http://davidpallmann.blogspot.com/2019/02/cia-world-factbook-data-on-azure-part-1.html
+
 http://davidpallmann.blogspot.com/2019/02/cia-world-factbook-data-on-azure-part-2.html
+
+http://davidpallmann.blogspot.com/2019/02/cia-world-factbook-data-on-azure-part-3.html
 
 # Web Site
 The web site is simply index.html and site.css and a background image, a static web page hosted in Azure Blob Storage.
