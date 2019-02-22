@@ -113,8 +113,8 @@
 
 button {
     padding: 10px;
-    background: #2196F3;
-    color: white;
+    /*background: #2196F3;
+    color: white;*/
     font-size: 17px;
     border: 1px solid grey;
     border-left: none;
@@ -164,35 +164,30 @@ body {
     left: 16px;
 }
 
-
 h1 {
     font-weight: 700;
     font-size: 32px;
     color: black;
     margin-bottom: 0;
-    /*margin-left: 120px;*/
     line-height: normal;
 }
 
 h2 {
     margin-bottom: 0;
     margin-top: 0;
-    color: white;
     font-size: 36px;
-    color: navajowhite;
+    /*color: navajowhite;*/
 }
 
 .subtitle {
     color: black;
     font-size: 14px;
-    /*margin-left: 150px;*/
     margin-top: 0px;
 }
 
-a {
-    /*color: hotpink;*/
+/*a {
     color: tan;
-}
+}*/
 
 .selector {
     position: absolute;
@@ -201,19 +196,16 @@ a {
 }
 
 select {
-    border-bottom: 1px solid #DDE0E7;
+    /*background-color: Wheat;*/
     color: #2a313a;
+    border-bottom: 1px solid #DDE0E7;
     cursor: pointer;
     font-size: 16px;
     font-weight: 700;
     padding: 0.5em;
     margin-bottom: 14px;
     max-width: 300px;
-    background-color: Wheat;
 }
-
-
-
 
 .searchbox {
     position: absolute;
@@ -222,20 +214,19 @@ select {
 }
 
 input {
-    color: black;
+    /*background-color: Wheat;*/
+    /*color: black;*/
     cursor: pointer;
     font-size: 16px;
     font-weight: 700;
     padding: 0.5em;
     margin-bottom: 14px;
     vertical-align: top;
-    background-color: Wheat;
 }
 
 #select-chart {
     visibility: visible;
 }
-
 
 option {
     border-bottom: 1px solid #DDE0E7;
@@ -247,7 +238,6 @@ option {
     margin: 0.5em;
     height: 200px;
 }
-
 
 .item {
     
@@ -289,17 +279,17 @@ option {
     max-width: 250px;
 }
 
-    .accordion-header:hover {
+    /*.accordion-header:hover {
         color: navajowhite;
-    }
+    }*/
 
 .accordion-content {
+    /*background-color: Cornsilk;*/
+    /*color: firebrick;*/
     display: none;
     border-bottom: 1px solid #DDE0E7;
-    background-color: Cornsilk;
     opacity: 0.9;
     padding: 1.5rem;
-    color: firebrick;
     max-width: calc(100% - 16px);
 }
 

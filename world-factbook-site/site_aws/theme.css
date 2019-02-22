@@ -1,0 +1,65 @@
+/* AWS */
+button {
+    background-color: darkgoldenrod;
+    color: white;
+}
+
+h2 {
+    color: powderblue;
+}
+
+.accordion-header:hover {
+    color: powderblue;
+}
+
+.accordion-content {
+    background-color: aliceblue;
+    color: black;
+}
+
+a {
+    color: cornflowerblue;
+}
+
+select {
+    background-color: lightskyblue;
+}
+
+input {
+    background-color: lightskyblue;
+    color: black;
+}
+
+
+/* Azure */
+
+    Zbutton {
+    background-color: #2196F3;
+    color: white;
+}
+
+Zh2 {
+    color: navajowhite;
+}
+
+za {
+    color: tan;
+}
+
+Z.accordion-header:hover {
+    color: navajowhite;
+}
+
+z.accordion-content {
+    background-color: Cornsilk;
+    color: firebrick;
+}
+
+zselect {
+    background-color: Wheat;
+}
+
+zinput {
+    background-color: Wheat;
+    color: black;
+}

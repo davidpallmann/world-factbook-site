@@ -9,7 +9,9 @@
         var yAxisTitle2 = null;
         var yAxisTitle3 = null;
 
-        $(document).ready(function () {
+    $(document).ready(function () {
+            $('#subtitle').html(cloud.poweredBy);
+
             $("#search-text").on("keyup", function (e) {
                 if (e.keyCode == 13) {
                     search();
@@ -58,7 +60,7 @@
                 setAllContent('Loading...');
 
                 if (haveFlag(countryName)) {
-                    $('#country-flag').attr('src', 'https://worldfactbook.blob.core.windows.net/data/' + countryKey + '.gif');
+                    $('#country-flag').attr('src', cloud.flagImageUrl(countryKey));
                     $('#country-flag').css('visibility', 'visible');
                 }
                 else {
@@ -69,14 +71,17 @@
 
                 // Retrieve JSON country record
 
-                var url = 'https://factbook.azure-api.net/world-factbook/country/' + countryKey;
+                var url = null;
+
+                url = cloud.countryRecordUrl(countryName, countryKey);
 
                 $.ajax({
                     type: 'GET',
                     url: url,
                     accepts: "json",
                 }).done(function (result) {
-                    data = $.parseJSON(result);
+
+                    data = cloud.resultToJson(result);
 
                     if (data) {
 
@@ -90,7 +95,8 @@
 
                         var intro = '';
                         if (haveFlag(countryName)) {
-                            intro = intro + '<div class="item"><b>Flag</b><br/><img class="content-image" src="https://worldfactbook.blob.core.windows.net/data/' + countryKey + '.gif"></div>';
+                            var flagImageUrl = cloud.flagImageUrl(countryKey);
+                            intro = intro + '<div class="item"><b>Flag</b><br/><img class="content-image" src="' + flagImageUrl + '"></div>';
                         }
                         if (data.introduction && data.introduction.background) {
                             intro += '<div class="item"><b>Background</b><br/>' + data.introduction.background + '</div>';
@@ -100,7 +106,8 @@
                         // Load content: Geography
 
                         var geo = '';
-                        geo = geo + '<div class="item"><b>Map</b><br/><a href="https://worldfactbook.blob.core.windows.net/data/' + countryKey + '-map.gif" target="_blank"><img class="content-image-large" src="https://worldfactbook.blob.core.windows.net/data/' + countryKey + '-map.gif"></a></div>';
+                        var mapImageUrl = cloud.mapImageUrl(countryKey);
+                        geo = geo + '<div class="item"><b>Map</b><br/><a href="' + mapImageUrl + '" target="_blank"><img class="content-image-large" src="' + mapImageUrl + '"></a></div>';
                         if (data.geography) {
                             var geography = data.geography;
                             if (geography.geographic_coordinates && geography.geographic_coordinates.latitude) {
@@ -130,7 +137,7 @@
                             if (data.people.population && data.people.population.total) {
                                 people += '<div class="item"><b>Population</b><br/>' + numberWithCommas(data.people.population.total) + '</div>';
                             }
-                            if (data.people.populatione && data.people.population.rank) {
+                            if (data.people.population && data.people.population.rank) {
                                 people += '<div class="item"><b>Global Rank</b><br/>' + data.people.population.global_rank + '</div>';
                             }
                             if (data.people.nationality && data.people.nationality.adjective) {
@@ -195,6 +202,9 @@
                             }
                             if (data.people.death_rate && data.people.death_rate.deaths_per_1000_population && data.people.death_rate.date) {
                                 people += '<div class="item"><b>Death Rate</b><br/>' + data.people.death_rate.deaths_per_1000_population + ' deaths per thousand (' + data.people.death_rate.date + ')</div>';
+                            }
+                            if (data.people.demographic_profile) {
+                                people += '<div class="item"><b>Demographic Profile</b><br/>' + data.people.demographic_profile + '</div>';
                             }
                         }
                         $('#content-people').html(people);
@@ -442,7 +452,7 @@
             $('#country-view').css('visibility', 'collapse');
             inCountryView = false;
 
-            var url = 'https://factbook.azure-api.net/world-factbook/search/' + term;
+            var url = cloud.searchUrl(term);
 
             $.ajax({
                 type: 'GET',
@@ -450,7 +460,7 @@
                 accepts: "json",
             }).done(function (response) {
 
-                var results = $.parseJSON(response);
+                var results = cloud.resultToJson(response);
 
                 var html = '<table id="results-table" style="color: white; font-size: 20px">';
                 var count = 0;
@@ -460,7 +470,8 @@
                         countryKey = CountryKey(results[i].name);
                         html += '<tr style="cursor: pointer; height: 24px; border-bottom: solid 1px white" onclick="selectCountry(' + "'" + results[i].name + "'" + ');">';
                         if (haveFlag(results[i].name)) {
-                            html += '<td style="text-align: right"><img class="content-image-thumbnail" src="https://worldfactbook.blob.core.windows.net/data/' + countryKey + '.gif"></td>';
+                            var flagImageUrl = cloud.flagImageUrl(countryKey);
+                            html += '<td style="text-align: right"><img class="content-image-thumbnail" src="' + flagImageUrl + '"></td>';
                         }
                         else {
                             html += '<td>&nbsp;</td>';
@@ -598,223 +609,59 @@
 
        // Chart selection changed - retrieve chart data and draw chart.
 
-        function chartSelectionChanged() {
+function chartSelectionChanged() {
+
             var chartName = $('#select-chart').val();
             if (!chartName) {
                 $('#chart_div').html('');
                 return;
             }
+            if (!cloud.columnChartAvailable(chartName)) {
+                $('#chart_div').html('');
+                return;
+            }
+            var reportId = chartName;
 
             if (!inChartView) {
                 setChartView();
             }
 
             $('#chart_div').html('');
+            $('#country').val('');
+
+            $("body").css("cursor", "progress");
+            $('#loading').css('visibility', 'visible');
 
             xAxisTitle = null;
             yAxisTitle = null;
             yAxisTitle2 = null;
             yAxisTitle3 = null;
 
-            var reportId = null;
-            var url = null;
+            var url = cloud.reportUrl(reportId);
 
-            switch (chartName) {
-                case 'area-highest':
-                    chartTitle = 'Area - Largest';
-                    xAxisTitle = 'Country';
-                    yAxisTitle = 'Area (sq km)';
-                    yAxisTitle2 = 'Land';
-                    yAxisTitle3 = 'Water';
-                    reportId = 'report-area-highest';
-                    break;
-                case 'area-lowest':
-                    chartTitle = 'Area - Smallest';
-                    xAxisTitle = 'Country';
-                    yAxisTitle = 'Area (sq km)';
-                    yAxisTitle2 = 'Land';
-                    yAxisTitle3 = 'Water';
-                    reportId = 'report-area-lowest';
-                    break;
-                case 'exports-highest':
-                    chartTitle = 'Exports - Highest';
-                    xAxisTitle = 'Country';
-                    yAxisTitle = 'Exports (USD)';
-                    yAxisTitle2 = 'Prior Year Exports (USD)';
-                    reportId = 'report-exports-highest';
-                    break;
-                case 'exports-lowest':
-                    chartTitle = 'Exports - Lowest';
-                    xAxisTitle = 'Country';
-                    yAxisTitle = 'Exports (USD)';
-                    yAxisTitle2 = 'Prior Year Exports (USD)';
-                    reportId = 'report-exports-lowest';
-                    break;
-                case 'imports-highest':
-                    chartTitle = 'Imports - Highest';
-                    xAxisTitle = 'Country';
-                    yAxisTitle = 'Imports (USD)';
-                    yAxisTitle2 = 'Prior Year Exports (USD)';
-                    reportId = 'report-imports-highest';
-                    break;
-                case 'imports-lowest':
-                    chartTitle = 'Imports - Lowest';
-                    xAxisTitle = 'Country';
-                    yAxisTitle = 'Imports (USD)';
-                    yAxisTitle2 = 'Prior Year Exports (USD)';
-                    reportId = 'report-imports-lowest';
-                    break;
-                case 'inflation-highest':
-                    chartTitle = 'Inflation - Highest';
-                    xAxisTitle = 'Country';
-                    yAxisTitle = 'Inflation Rate';
-                    reportId = 'report-inflation-highest';
-                    break;
-                case 'inflation-lowest':
-                    chartTitle = 'Inflation - Lowest';
-                    xAxisTitle = 'Country';
-                    yAxisTitle = 'Inflation Rate';
-                    reportId = 'report-inflation-lowest';
-                    break;
-                case 'internet-users-highest':
-                    chartTitle = 'Internet Users - Most';
-                    xAxisTitle = 'Country';
-                    yAxisTitle = 'No. Internet Users (Millions)';
-                    yAxisTitle2 = 'Percent of Populaton';
-                    reportId = 'report-internet-users-highest';
-                    break;
-                case 'population-highest':
-                    chartTitle = 'Population - Highest';
-                    xAxisTitle = 'Country';
-                    yAxisTitle = 'Population';
-                    reportId = 'report-population-highest';
-                    break;
-                case 'population-lowest':
-                    chartTitle = 'Population - Lowest';
-                    xAxisTitle = 'Country';
-                    yAxisTitle = 'Population';
-                    reportId = 'report-population-lowest';
-                    break;
-            }
+            // Get the report data
 
-            if (!reportId) {
-                $('#chart_div').html('');
-                return;
-            }
-            url = 'https://factbook.azure-api.net/world-factbook/' + reportId;
-
-
-            $('#country').val('');
-
-            $("body").css("cursor", "progress");
-            $('#loading').css('visibility', 'visible');
-
+            googleChartData = [];
             var chartData = null;
-            $.ajax({
-                type: 'GET',
-                url: url,
-                accepts: "json",
-            }).done(function (result) {
-                chartData = $.parseJSON(result);
-                googleChartData = null;
 
-                switch (chartName) {
-                    case 'internet-users-highest':
-                        googleChartData = [];
-                        if (chartData != null) {
-                            var country = null;
-                            countrySelect = [];
-                            var total = 0;
-                            for (var d = 0; d < chartData.length; d++) {
-                                country = chartData[d];
-                                countrySelect.push(country.name);
-                                total = country.total / 1000000;
-                                googleChartData.push([
-                                    { v: country.name }, total, country.percent_of_population
-                                ]);
-                            }
-                        }
-                        break;
-                    case 'area-highest':
-                    case 'area-lowest':
-                        googleChartData = [];
-                        if (chartData != null) {
-                            var country = null;
-                            var land = 0;
-                            var water = 0;
-                            countrySelect = [];
-                            for (var d = 0; d < chartData.length; d++) {
-                                country = chartData[d];
-                                countrySelect.push(country.name);
+    $.ajax({
+        type: 'GET',
+        url: url,
+        accepts: "json",
+    }).done(function (result) {
 
-                                land = 0;
-                                water = 0;
-                                if (country.land) land = country.land.value;
-                                if (country.water) water = country.water.value;
+        // Convert report data to Google Charts structure and call function to draw bar chart
 
-                                googleChartData.push([
-                                    { v: country.name }, country.total.value, land, water
-                                ]);
-                            }
-                        }
-                        break;
-                    case 'exports-highest':
-                    case 'exports-lowest':
-                    case 'imports-highest':
-                    case 'imports-lowest':
-                        googleChartData = [];
-                        if (chartData != null) {
-                            var country = null;
-                            countrySelect = [];
-                            for (var d = 0; d < chartData.length; d++) {
-                                country = chartData[d];
-                                countrySelect.push(country.name);
-                                var n1 = country["$1"].value;
-                                var n2 =(country["$2"] ? country["$2"].value : null);
-                                googleChartData.push([
-                                    { v: country.name }, n1, n2
-                                ]);
-                            }
-                        }
-                        break;
-                    case 'inflation-highest':
-                    case 'inflation-lowest':
-                        googleChartData = [];
-                        if (chartData != null) {
-                            var country = null;
-                            countrySelect = [];
-                            for (var d = 0; d < chartData.length; d++) {
-                                country = chartData[d];
-                                countrySelect.push(country.name);
-                                googleChartData.push([
-                                    { v: country.name }, country["$1"].value
-                                ]);
-                            }
-                        }
-                        break;
-                    case 'population-highest':
-                    case 'population-lowest':
-                        googleChartData = [];
-                        if (chartData != null) {
-                            var country = null;
-                            countrySelect = [];
-                            for (var d = 0; d < chartData.length; d++) {
-                                country = chartData[d];
-                                countrySelect.push(country.name);
-                                googleChartData.push([
-                                    { v: country.name }, country.total
-                                ]);
-                            }
-                        }
-                        break;
-                }
+        chartData = cloud.resultToJson(result);
+        googleChartData = cloud.columnChartData(reportId, chartData);
 
-                google.charts.load('current', { packages: ['corechart', 'bar'] });
-                google.charts.setOnLoadCallback(drawColumnChart);
-                })
+        google.charts.load('current', { packages: ['corechart', 'bar'] });
+        google.charts.setOnLoadCallback(drawColumnChart);
+    });
         }
 
-      // Draw column chart
+      // Draw column chart with Google Charts
+      //
       // Inputs:
       // googleChartData .. rows of data
       // xAxisTitle ....... title of horizontal chart axis

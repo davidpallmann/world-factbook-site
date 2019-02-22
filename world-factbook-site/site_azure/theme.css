@@ -1,0 +1,32 @@
+/* Azure */
+
+button {
+    background-color: #2196F3;
+    color: white;
+}
+
+h2 {
+    color: navajowhite;
+}
+
+a {
+    color: tan;
+}
+
+.accordion-header:hover {
+    color: navajowhite;
+}
+
+.accordion-content {
+    background-color: Cornsilk;
+    color: firebrick;
+}
+
+select {
+    background-color: Wheat;
+}
+
+input {
+    background-color: Wheat;
+    color: black;
+}

@@ -3,24 +3,26 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>World Country Data</title>
-    <link rel="icon" href="https://worldfactbook.blob.core.windows.net/site/favicon.ico">
+    <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="site.css?v=3" />
+    <link rel="stylesheet" href="theme.css?v=3" />
     <link rel="https://fonts.googleapis.com/css?family=Nunito:200,400,700" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="cloud.js?v=3"></script>
 </head>
 
-<body background="https://worldfactbook.blob.core.windows.net/site/old-world-map.jpg">
+<body background="world-map.jpg">
 
     <div id="preamble" class="preamble">
         <table>
             <tr>
-                <td><img class="logo" src="https://worldfactbook.blob.core.windows.net/site/LogoAzureFactbook.png" /></td>
+                <td><img class="logo" src="logo.png" /></td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td>
                     <h1>World Country Data</h1>
-                    <div class="subtitle">Powered by Azure Functions &amp; Cosmos DB<br />Data courtesy of&nbsp;<a href="https://www.cia.gov/library/publications/the-world-factbook/" target="_blank">CIA WorldFactbook</a></div>
+                    <div id="subtitle" class="subtitle"></div>
                 </td>
             </tr>
         </table>
@@ -35,17 +37,17 @@
 
             <select id="select-chart" onchange="chartSelectionChanged()">
                 <option value="" selected>---- Select a Chart ----</option>
-                <option value="area-highest">Area - Largest</option>
-                <option value="area-lowest">Area - Smallest</option>
-                <option value="exports-highest">Exports - Highest</option>
-                <option value="exports-lowest">Exports - Lowest</option>
-                <option value="imports-highest">Imports - Highest</option>
-                <option value="imports-lowest">Imports - Lowest</option>
-                <option value="inflation-highest">Inflation - Highest</option>
-                <option value="inflation-lowest">Inflation - Lowest</option>
-                <option value="internet-users-highest">Internet Users - Most</option>
-                <option value="population-highest">Population - Highest</option>
-                <option value="population-lowest">Population - Lowest</option>
+                <option value="report-area-highest">Area - Largest</option>
+                <option value="report-area-lowest">Area - Smallest</option>
+                <option value="report-exports-highest">Exports - Highest</option>
+                <option value="report-exports-lowest">Exports - Lowest</option>
+                <option value="report-imports-highest">Imports - Highest</option>
+                <option value="report-imports-lowest">Imports - Lowest</option>
+                <option value="report-inflation-highest">Inflation - Highest</option>
+                <option value="report-inflation-lowest">Inflation - Lowest</option>
+                <option value="report-internet-users-highest">Internet Users - Most</option>
+                <option value="report-population-highest">Population - Highest</option>
+                <option value="report-population-lowest">Population - Lowest</option>
             </select>&nbsp;
             <button id="btn-goto-search" onclick="gotoSearch()"><i class="fa fa-search" style="height: 32px;"></i>&nbsp;Search</button>
 
