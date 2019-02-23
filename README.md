@@ -22,6 +22,8 @@ http://davidpallmann.blogspot.com/2019/02/cia-world-factbook-data-on-azure-part-
 
 http://davidpallmann.blogspot.com/2019/02/cia-world-factbook-data-on-aws-part-1.html
 
+http://davidpallmann.blogspot.com/2019/02/cia-world-factbook-data-on-aws-part-2.html
+
 # Web Site
 The web site is simply a handful of files hosted in cloud storage. 
 
