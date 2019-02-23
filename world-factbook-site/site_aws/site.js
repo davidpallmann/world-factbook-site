@@ -572,6 +572,7 @@
                 case 'Pacific Ocean':
                 case 'Paracel Islands':
                 case 'Southern Ocean':
+                case 'Spratly Islands':
                     return false;
                 default:
                     return true;
