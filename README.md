@@ -5,7 +5,7 @@ The CIA World Factbook is a valuable online resource that contains a wealth of i
 
 World Factbook Indexer is an Azure Durable Function that retrieves this data and updates both a Cosmos DB and Azure Blob Storage. It creates a back-end repository from which country data can be queries and displayed.
 
-World Factbook Site (this repository) is a web site and API (via Azure Functions) that allows browsing and searching of this data.
+World Factbook Site (this repository) is a web site and API (via Azure Functions / AWS Lambda Functions) that allows browsing and searching of this data.
 The site is currently hosted at:
 
 http://world-factbook.aws.davidpallmann.com
